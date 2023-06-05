@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+<!--    引入jdbc 配置文件-->
+    <properties resource="jdbc.properties"/>
+<!--    设置UserMapper里的查询用户的返回类型时的 resultType-->
+    <typeAliases>
+<!--        不常用这标签<typeAlias type="com.qwh.mybatis.pojo.User" alias="User"></typeAlias>-->
+<!--        <typeAlias type="com.qwh.mybatis.pojo.User" ></typeAlias>-->
+<!--        以包为单位设置默认的类型别名 且不区分大小写-->
+        <package name="com.qwh.mybatis.pojo"/>
+
+    </typeAliases>
+    <!--
+    设置连接数据库的环境
+    environment配置多个环境
+    -->
+    <environments default="development">
+        <!--default 默认的环境id-->
+        <environment id="development">
+            <!--
+                transactionManager设置事务管理反式
+                type = jdbc
+              -->
+            <transactionManager type="JDBC"/>
+<!--            配置数据源polled unpolled jnd1-->
+            <dataSource type="POOLED">
+<!--                未引入properties配置文件-->
+<!--                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/MyBatis"/>-->
+<!--                <property name="username" value="root"/>-->
+<!--                <property name="password" value="123123"/>-->
+<!--                引入jdbc.properties 配置文件后-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+
+            </dataSource>
+        </environment>
+    </environments>
+    <!--引入接口的映射文件-->
+    <mappers>
+<!--        <mapper resource="mappers/UserMapper.xml"/>或-->
+<!--        以包为单位引入映射文件-->
+            <!--
+            mapper接口所在的包要和映射文件所在的包一致
+            mapper接口要和映射文件的名字一致
+            -->
+        <package name="com.qwh.mybatis.mapper"/>
+
+    </mappers>
+</configuration>

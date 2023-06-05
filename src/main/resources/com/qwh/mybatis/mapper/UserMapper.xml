@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--填接口的路径-->
+<mapper namespace="com.qwh.mybatis.mapper.UserMapper">
+
+    <!--id 就是接口里面的方法名 int insertUser();-->
+    <insert id="insertUser">
+        insert into t_user value(null,'张三','123',23,'女','123123@qq.com')
+    </insert>
+<!--    boolean updateUser-->
+    <update id="updateUser">
+        update t_user set username = '李四' where id = 4;
+    </update>
+<!--    boolean deleteUser-->
+    <delete id="deleteUser">
+        delete from t_user where id = 5;
+    </delete>
+<!--    User searchUser-->
+    <!--
+    resultType可以修改
+    查询功能的标签必须设置resultType或者resultMap
+    resultType 设置默认映射关系
+    resultMap 设置自定义映射关系
+    -->
+        <!--
+        未在mybatis-conf.xml中设置<typeAlias type="com.qwh.mybatis.pojo.User" ></typeAlias>
+        -->
+<!--    <select id="searchUser" resultType="com.qwh.mybatis.pojo.User">-->
+<!--    在mybatis-conf.xml中设置<typeAlias type="com.qwh.mybatis.pojo.User"
+        或mybatis-conf.xml中设置<package name="com.qwh.mybatis.pojo"-->
+    <select id="searchUser" resultType="User">
+        select * from t_user where id=3;
+    </select>
+<!--    List<User> selectAllUser()-->
+    <select id="selectAllUser" resultType="User">
+        select * from t_user;
+    </select>
+</mapper>
